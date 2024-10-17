@@ -1,10 +1,15 @@
 import { View, Text, StyleSheet, ImageBackground, ScrollView, } from 'react-native'
 import React, { useState } from 'react'
-import { Link } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 
-import Input from './components/input';
-import CustomButton from './components/customButton';
-import LogInMethods from './components/logInMethods';
+// componets import
+import Input from '../external-functions/components/input';
+import CustomButton from '../external-functions/components/customButton';
+import LogInMethods from '../external-functions/components/logInMethods';
+
+// firebase imports
+import { auth } from '@/config/firebase';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 const Register = () => {
 
@@ -18,6 +23,8 @@ const Register = () => {
   const [confirmPassErr, setConfirmPassErr] = useState<string>('');//for empty fields
   const [phoneNum, setPhoneNum] = useState<string>('');
   const [phoneNumErr, setPhoneNumErr] = useState<string>('');
+
+  const router = useRouter();
 
   //on value changes:
   const onEmailChange = (text: string) => {
@@ -46,10 +53,25 @@ const Register = () => {
   }
 
   //Register Button:
-  const onRegister = () => {
+  const onRegister = async () => {
     //check the passwods match
     if(password != confirmPass){
       setConfirmPassErr("password do not match")
+    }
+    else if(password == ""){
+      setPasswordErr("password is required");
+    }
+    else if(confirmPass == ""){
+      setConfirmPassErr("field is required");
+    }
+    else{
+      try{
+        await createUserWithEmailAndPassword(auth, email, password);
+        router.push('/tabs');
+      }
+      catch(err){
+        console.error(err);
+      }
     }
   }
 

@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-import offerStyle from '../myStyles/offerStyle';
+import offerStyle from '../../external-functions/myStyles/offerStyle';
 
 const jobOffer = () => {
   return (

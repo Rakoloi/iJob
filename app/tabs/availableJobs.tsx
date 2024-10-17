@@ -3,7 +3,7 @@ import React from 'react'
 import { useNavigation } from 'expo-router'
 import { useRouter } from 'expo-router'
 
-import availJobsStyle from '../myStyles/availJobsStyle'
+import availJobsStyle from '../../external-functions/myStyles/availJobsStyle'
 // create a custom search input
 
 //temporary code for the UI

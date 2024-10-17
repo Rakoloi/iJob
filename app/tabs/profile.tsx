@@ -3,7 +3,7 @@ import React from 'react'
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router'
 
-import profileStyle from '../myStyles/profileStyle';
+import profileStyle from '../../external-functions/myStyles/profileStyle';
 
 const Profile = () => {
 

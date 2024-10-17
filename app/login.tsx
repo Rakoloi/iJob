@@ -1,19 +1,24 @@
-import { View, Text, ImageBackground, StyleSheet, ScrollView } from 'react-native'
+import { View, Text, ImageBackground, StyleSheet, ScrollView, Alert } from 'react-native'
 import React, { useState } from 'react'
 import { Link, useRouter,  } from 'expo-router';
 import { useNavigation } from '@react-navigation/native';
 
-import Input from './components/input';
-import CustomButton from './components/customButton';
-import LogInMethods from './components/logInMethods';
+//firebase imports
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from './../config/firebase'
+
+import Input from '../external-functions/components/input';
+import CustomButton from '../external-functions/components/customButton';
+import LogInMethods from '../external-functions/components/logInMethods';
 import { useRoute } from '@react-navigation/native';
+import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
 
 const Login = () => {
     const [userEmail, setUseremail] = useState<string>('');
     const [emailError, setEmailError] = useState<string>('');
-
     const [userPassword, setUserPassword] = useState<string>('');
     const [passwordError, setPasswordError] = useState<string>('');
+    //const auth = getAuth();
 
     const onEmailChange = (text: string) => {
         setUseremail(text);
@@ -27,8 +32,36 @@ const Login = () => {
     const router = useRouter();
     //sign in button function:
     const onSignInPressed = () =>{
-        console.log("user name is: " + userEmail);
-        router.push('/tabs');
+        if(userEmail == "" && userPassword == ""){
+            setEmailError("email is required");
+            setPasswordError("password is required");
+        }
+        else if(userEmail == ""){
+            alert("email its empty");
+            setEmailError("email is required");
+        }
+        else if(userPassword == ""){
+            alert("password its empty");
+            setPasswordError("password is required");
+        }
+        else{
+            signInWithEmailAndPassword(auth, userEmail, userPassword)
+                .then((userCredentials) => {
+                    //const user = userCredentials.user;
+                    router.push('/tabs');
+                    console.log("welcome...");
+                })
+                .catch((error) => {
+                    if(error.message.includes("auth/invalid-email")){
+                        alert("invalid credentials");
+                        setUseremail("");
+                        setUserPassword("");                       
+                    }
+                    else{
+                        console.log(error.message);
+                    }
+                })
+            }
     }
     
   return (
@@ -51,6 +84,7 @@ const Login = () => {
             />
 
             <Text style={styles.inputText}>Password</Text>
+            {passwordError ? <Text style={{color: "red"}}>{passwordError}</Text> : null}
             <Input 
                 placeholder="password"
                 value={userPassword}

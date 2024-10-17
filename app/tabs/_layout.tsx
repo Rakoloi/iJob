@@ -7,7 +7,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { DrawerContentScrollView, DrawerItem, DrawerItemList } from '@react-navigation/drawer';
 import { useRouter } from 'expo-router';
 
-import styles from '../myStyles/tabStyle';
+import styles from '../../external-functions/myStyles/tabStyle';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const CustomDrawerContent = (props: any) => {

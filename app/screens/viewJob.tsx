@@ -1,9 +1,9 @@
 import { Alert, ScrollView, Text, View } from 'react-native'
 import React from 'react'
 import { router, useLocalSearchParams } from 'expo-router';
-import CustomButton from '../components/customButton';
-import ViewJobsStyle from '../myStyles/viewJob';
-import MapComponent from '../components/map';
+import CustomButton from '../../external-functions/components/customButton';
+import ViewJobsStyle from '../../external-functions/myStyles/viewJob';
+import MapComponent from '../../external-functions/components/map';
 import { Ionicons } from '@expo/vector-icons';
 
 const viewJob = () => {

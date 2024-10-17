@@ -19,6 +19,7 @@ const Input: React.FC<Props>= ({ value, setValue, placeholder, secureTextEntry, 
   const toggleShowPassword = () => {
     setShowPassword((prev: boolean) => !prev);
   };
+  console.log(placeholder+ ": placeholder")
 
   return (
     <View style={styles.container}>
@@ -30,14 +31,14 @@ const Input: React.FC<Props>= ({ value, setValue, placeholder, secureTextEntry, 
         secureTextEntry={secureTextEntry && !showPassword}
         autoCapitalize="none"
         keyboardType={typeOfKeyboard}
-        
+        selectionColor="#0acf83"
       />
       {secureTextEntry && (
         <TouchableOpacity style={styles.showPasswordButton} onPress={toggleShowPassword}>
-          <Ionicons name={showPassword ? 'eye' : 'eye-off'} size={25} color="#484848" />
+          <Ionicons name={showPassword ? 'eye' : 'eye-off'} size={30} color="#484848" />
         </TouchableOpacity>
       )}
-      {error && <Text style={styles.errorText}>{error}</Text>}
+      
     </View>
   )
 }
@@ -45,30 +46,23 @@ const Input: React.FC<Props>= ({ value, setValue, placeholder, secureTextEntry, 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#e7e7e8',
-    width: '100%',
-    borderColor: '#0acf83',
-    borderWidth: 1,
-    borderRadius: 5,
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingHorizontal: 8,
-    marginVertical: 8,
-    color: 'black',
-    flexDirection: 'row',
-    alignItems: 'center',
-    //height: "10%"
+    borderRadius: 8,
   },
   input: {
-    flex: 1,
-    fontSize: 15,
-    color:"black",
+    fontSize: 20,
+    borderWidth: 1,
+    borderColor: '#0acf83',
+    color: 'black',
+    padding: 8,
+    borderRadius: 8,
   },
   showPasswordButton: {
     position: 'absolute',
-    //top: 12,
     right: 10,
-    marginTop: 'auto',
-    marginBottom: 'auto'
+    justifyContent: 'center',
+    alignSelf: 'center',
+    width: 30,
+    height: '100%',
   },
   errorText: {
     color: 'red',

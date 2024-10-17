@@ -1,10 +1,10 @@
 import { View, Text, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 
-import Input from '../components/input';
-import CustomButton from '../components/customButton';
-import createJob from '../myStyles/createJob'
-import locationInput from '../components/locationInput';
+import Input from '../../external-functions/components/input';
+import CustomButton from '../../external-functions/components/customButton';
+import createJob from '../../external-functions/myStyles/createJob'
+import locationInput from '../../external-functions/components/locationInput';
 
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 

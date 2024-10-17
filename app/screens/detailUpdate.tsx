@@ -2,8 +2,8 @@ import { View, Text } from 'react-native'
 import React, { useState } from 'react'
 import { router, useLocalSearchParams } from 'expo-router'
 
-import Input from '../components/input'
-import CustomButton from '../components/customButton'
+import Input from '../../external-functions/components/input'
+import CustomButton from '../../external-functions/components/customButton'
 
 
 const detailUpdate = () => {
